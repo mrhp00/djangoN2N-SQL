@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block section1 %}
+    <div class="btn-group">
+        <a href="courses/add" class="btn btn-primary">Add</a>
+    </div>
+    <table class="table table-hover">
+        <tr class="text-danger">
+            <th>title</th>
+            <th>duration</th>
+            <th>...</th>
+        </tr>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.title }}</td>
+                <td>{{ course.duration }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-outline-primary" href="courses/edit?id={{ course.id }}">Edit</a>
+                        <a class="btn btn-outline-danger" href="courses/delete?id={{ course.id }}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

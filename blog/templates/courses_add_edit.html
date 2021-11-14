@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block section1 %}
+    <form action="edit" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="hidden" value="{{ courses.id }}" name="id" id="id">
+            <label for="title">Title:</label>
+            <input type="text" value="{{ courses.title }}" class="form-control" placeholder="Title" id="title"
+                   name="title">
+        </div>
+        <div class="form-group">
+            <label for="duration">Duration:</label>
+            <input type="text" value="{{ courses.duration }}" class="form-control" placeholder="Duration in hour"
+                   id="duration" name="duration">
+        </div>
+        <div class="form-group">
+            {% for student in students %}
+
+                {% if student.id in joined %}
+                    <input checked type="checkbox" value="{{ student.id }}" name="students[]"
+                           id="{{ student.name }}">
+                    <label for="{{ student.name }}">{{ student.name }} {{ student.family }}</label><br/>
+                {% else %}
+                    <input type="checkbox" value="{{ student.id }}" name="students[]" id="{{ student.name }}">
+                    <label for="{{ student.name }}">{{ student.name }} {{ student.family }}</label><br/>
+                {% endif %}
+
+
+                {#                <input type="checkbox" value="{{ student.id }}" name="students[]" id="{{ student.name }}">#}
+                {#                <label for="{{ student.name }}">{{ student.name }} {{ student.family }}</label><br/>#}
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}
